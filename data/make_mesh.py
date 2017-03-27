@@ -1,3 +1,5 @@
+# Copyright 2017 Chris Richardson (chris@bpi.cam.ac.uk)
+
 import pygmsh as pg
 import meshio
 import numpy

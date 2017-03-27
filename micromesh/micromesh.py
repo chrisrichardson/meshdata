@@ -1,3 +1,4 @@
+# Copyright 2017 Chris Richardson (chris@bpi.cam.ac.uk)
 """ A super simple library for low volume two-dimensional unstructured meshes. Meshes are
     stored as python dicts containing 'geometry', 'topology' and maybe other keys
     and can be read from a URL pointing to a text-based XDMF file """
@@ -21,7 +22,7 @@ def get(url):
     # FIXME: check return status
 
     et = ET.fromstring(r.text)
-    print(et)
+    # print(et)
 
     # Do more checks
     grid = et[0][0]
@@ -36,9 +37,9 @@ def get(url):
     gdims = numpy.fromstring(geometry[0].attrib['Dimensions'], sep=' ', dtype='int')
     npgeom = numpy.fromstring(geometry[0].text, sep=' ', dtype='float').reshape(gdims)
 
-    # Find all attributes and put them in a list
+    # FIXME: find all attributes and put them in a list
     attr = grid.find('Attribute')
-    print(attr.attrib)
+    # print(attr.attrib)
     adims = numpy.fromstring(attr[0].attrib['Dimensions'], sep=' ', dtype='int')
     npattr = numpy.fromstring(attr[0].text, sep=' ', dtype='int')
 
