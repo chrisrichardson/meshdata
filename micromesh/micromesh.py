@@ -75,7 +75,7 @@ def rectangle_mesh(nx, ny):
     mesh = {'geometry':geometry, 'topology':topology}
     return mesh
 
-def plot(mesh, **kwargs):
+def plot(mesh, *args, **kwargs):
     """ Plot a mesh with matplotlib, possibly with associated data,
         which may be associated with points or triangles """
 
@@ -86,7 +86,10 @@ def plot(mesh, **kwargs):
 
     plt.gca(aspect='equal')
 
-    data = kwargs['data']
+    if args:
+        data = args[0]
+    else:
+        data = None
     if data is not None:
         if len(data)==len(geom):
             plt.tricontourf(x, y, topo, data, 40, **kwargs)
