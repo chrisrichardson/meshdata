@@ -75,7 +75,7 @@ def rectangle_mesh(nx, ny):
     mesh = {'geometry':geometry, 'topology':topology}
     return mesh
 
-def plot(mesh, data=None):
+def plot(mesh, **kwargs):
     """ Plot a mesh with matplotlib, possibly with associated data,
         which may be associated with points or triangles """
 
@@ -86,16 +86,17 @@ def plot(mesh, data=None):
 
     plt.gca(aspect='equal')
 
+    data = kwargs['data']
     if data is not None:
         if len(data)==len(geom):
-            plt.tricontourf(x, y, topo, data, 40)
+            plt.tricontourf(x, y, topo, data, 40, **kwargs)
         elif len(data)==len(topo):
-            tr = tri.Triangulation(x, y, topo)
+            tr = tri.Triangulation(x, y, topo, **kwargs)
             plt.tripcolor(tr, data)
         else:
             raise RuntimeError("Data is wrong length")
 
-    plt.triplot(x, y, topo, color='k', alpha=0.5)
+    plt.triplot(x, y, topo, color='k', alpha=0.5, **kwargs)
 
     xmax = x.max()
     xmin = x.min()
