@@ -88,18 +88,15 @@ def plot(mesh, *args, **kwargs):
 
     if args:
         data = args[0]
-    else:
-        data = None
-    if data is not None:
         if len(data)==len(geom):
             plt.tricontourf(x, y, topo, data, 40, **kwargs)
         elif len(data)==len(topo):
-            tr = tri.Triangulation(x, y, topo, **kwargs)
-            plt.tripcolor(tr, data)
+            tr = tri.Triangulation(x, y, topo)
+            plt.tripcolor(tr, data, **kwargs)
         else:
             raise RuntimeError("Data is wrong length")
 
-    plt.triplot(x, y, topo, color='k', alpha=0.5, **kwargs)
+    plt.triplot(x, y, topo, color='k', alpha=0.5)
 
     xmax = x.max()
     xmin = x.min()
